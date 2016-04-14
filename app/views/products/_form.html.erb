@@ -1,4 +1,5 @@
-<%= form_for(@product) do |f| %>
+<%= form_for @product, :html => {:multipart => true} do |f| %>
+  <div ><% @product.name %></div> 
   <% if @product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -10,24 +11,65 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.number_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.number_field :category_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <fieldset>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <%= f.label :price %>
+        <%= f.text_field :price %>
+      </div>
+      <div class="large-6 columns">
+        <%= f.label :quantity %>
+        <%= f.number_field :quantity %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :category_id %>
+        <%= f.number_field :category_id %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+      </div>
+    </div>
+    <% count = 0 %>
+    <%= f.fields_for :photos do |photo_builder| %>
+      <div class="row">
+        <div class="large-2 columns">
+          <%= photo_builder.label :default %> 
+          <%= photo_builder.check_box :default %>
+        </div>
+      <% if @product.photos[count].link_url.nil? || @product.photos[count].link_url == '' %>
+        <div class="large-8 columns">
+          <%= photo_builder.file_field :link %>
+        </div>
+      <% else %>
+        <div class="large-8 columns">
+          <%= photo_builder.label :link %>
+          <%= photo_builder.text_field :link %>
+        </div>
+      <% end %>
+        <div class="large-2 columns">
+          <%= photo_builder.label :_destroy, 'Delete' %>
+          <%= photo_builder.check_box :_destroy %>   
+        </div>
+      </div>
+      <% count += 1 %>
+    <% end %>
+    <div class="row">
+      <%= f.submit 'Add photo', :name => "add_photo" %>
+      <%= f.submit 'Delete checked photo', :name => "remove_photo" %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
 <% end %>

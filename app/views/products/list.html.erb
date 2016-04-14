@@ -1,0 +1,35 @@
+<h2><%= @cateogry.name %></h2>
+<% count = 1 %>
+<% @products.each do |p| %>
+  <% if (count%3 == 0 || count == @products.length) %>
+      <div class="large-4 columns" onclick="location.href='<%= show_product_path(p.id) %>'">
+        <div class="callout" data-equalizer-watch>
+          <h4><%= p.name %></h4>
+          <%= image_tag p.photos[0].link if p.photos[0].link %>
+          <h5>$<%= p.price %></h5>
+          <h5><%= p.name %></h5>
+        </div>
+      </div>
+    </div>
+  <% elsif count%3 == 1 %>
+      <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
+        <div class="large-4 columns" onclick="location.href='<%= show_product_path(p.id) %>'">
+          <div class="callout" data-equalizer-watch>
+          <h4><%= p.name %></h4>
+          <%= image_tag p.photos[0].link if p.photos[0].link %>
+          <h5>$<%= p.price %></h5>
+          <h5><%= p.name %></h5>
+          </div>
+        </div>
+  <% else %>
+      <div class="large-4 columns" onclick="location.href='<%= show_product_path(p.id) %>'">
+        <div class="callout" data-equalizer-watch>
+          <h4><%= p.name %></h4>
+          <%= image_tag p.photos[0].link if p.photos[0].link %>
+          <h5>$<%= p.price %></h5>
+          <h5><%= p.name %></h5>
+        </div>
+      </div>
+  <% end %>
+  <% count+=1 %>
+<% end %>

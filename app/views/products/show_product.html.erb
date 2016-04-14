@@ -1,0 +1,18 @@
+<br>
+<div class="row">
+	<div class="large-7 columns">
+		<ul data-orbit>
+			<% @product.photos.each do |i| %>
+				<li>
+					<%= image_tag i.link_url %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="large-5 columns">
+		<h1><%= @product.name %></h1>
+		<strong>Quantity: <%= @product.quantity %></strong>
+		<strong>Price: <%= @product.price %></strong>
+		<p><%= @product.description %></p>
+	</div>
+</div>

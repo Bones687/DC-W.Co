@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  link: MyString
+  default: false
+  product_id: 
+
+two:
+  link: MyString
+  default: false
+  product_id: 

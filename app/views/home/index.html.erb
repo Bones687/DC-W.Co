@@ -1,0 +1,28 @@
+<% count = 1 %>
+<% @categories.each do |c| %>
+  <% if (count%3 == 0 || count == @categories.length) %>
+      <div class="large-4 columns">
+        <div class="callout" data-equalizer-watch>
+          <img src=<%= c.photo %>>
+          <%= link_to c.name, list_path(c) %>
+        </div>
+      </div>
+    </div>
+  <% elsif count%3 == 1 %>
+      <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
+        <div class="large-4 columns">
+          <div class="callout" data-equalizer-watch>
+            <img src=<%= c.photo %>>
+            <%= link_to c.name, list_path(c) %>
+          </div>
+        </div>
+  <% else %>
+      <div class="large-4 columns">
+        <div class="callout" data-equalizer-watch>
+          <img src=<%= c.photo %>>
+          <%= link_to c.name, list_path(c) %>
+        </div>
+      </div>
+  <% end %>
+  <% count+=1 %>
+<% end %>

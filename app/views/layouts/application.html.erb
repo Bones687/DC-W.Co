@@ -14,7 +14,7 @@
   	<!-- Set the viewport width to device width for mobile -->
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  	<title><%= content_for?(:title) ? yield(:title) : "DC&W.Co" %></title>
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
@@ -22,16 +22,59 @@
   </head>
 
   <body>
-    <nav class="top-bar">
-      <ul class="title-arer">
-        <li class="name">
-          <h1><%= link_to "Awesome Store", products_path %></a></h1>
-      </ul>
-    </nav>
+    <div class="fixed">
+      <div class="top-bar">
+        <div class="top-bar-section">      
+          <ul class="title-area">
+            <li class="name">
+              <h1><%= link_to "Home", root_url %></a></h1>
+          </ul>
+          <ul class="right">
+            <li class="divider"></li>
+            <li class="has-dropdown"><%= link_to "Browse Products", products_path %>
+              <ul class="dropdown">
+                <% categories_list.each do |c| %>
+                  <li class="name"><%= link_to c.name, list_path(c) %></li>
+                <% end %>
+              </ul>
+            </li>
+            <% if current_user %>
+              <li class="has-dropdown"><a href="#"><%= "Welcome #{current_user.first_name}" %></a>
+                <ul class="dropdown">
+                  <li class="name"><%= link_to "Logout", logout_path %></li>
+                </ul>
+              </li>
+              <% if current_user.admin %>
+                <li class="has-dropdown"><a href="#">Admin</a>
+                  <ul class="dropdown">
+                    <li class="has-dropdown"><a href="#">Categories</a>
+                      <ul class="dropdown">
+                        <li class="name"><%= link_to "New Category", new_category_path %></li>
+                        <li class="name"><%= link_to "All Categories", categories_path %></li>
+                      </ul>
+                    </li>
+                    <li class="has-dropdown"><a href="#">Products</a>
+                      <ul class="dropdown">
+                        <li class="name"><%= link_to "New Product", new_product_path %></li>
+                        <li class="name"><%= link_to "All Products", products_path %></li>
+                      </ul>
+                    </li>
+                    <li class="name"><%= link_to "Users", users_path %></li>
+                  </ul>
+                </li>
+              <% end %>
+            <% else %>
+              <li><%= link_to "Sign Up", signup_path %></li>
+              <li><%= link_to "Login", login_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
     
     <div class="row">
-      <div class="large-8 columns"><%= yield %></div>
-      <div class="large-4 columns">
+      <div class="large-10 columns"><%= yield %></div>
+      <div class="large-2 columns">
         <h2>About Us</h2>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

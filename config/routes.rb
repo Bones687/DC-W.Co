@@ -1,12 +1,18 @@
 PracticeSite::Application.routes.draw do
 
-  resources :categories
+  get 'signup' => 'users#new', as: 'signup'
+  get 'login' => 'sessions#new', as: 'login'
+  get 'logout' => 'sessions#destroy', as: 'logout'
 
-  root 'home#index'
+  get 'list/:id' => 'products#list', as: 'list'
+  get 'show_product/:id' => 'products#show_product', as: 'show_product'
 
   resources :users
-
+  resources :categories
   resources :products
+  resources :sessions
+
+  root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

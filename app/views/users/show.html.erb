@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <%= @user.password %>
+  <strong>Password digest:</strong>
+  <%= @user.password_digest %>
 </p>
 
 <p>
@@ -43,6 +43,11 @@
 <p>
   <strong>Zip:</strong>
   <%= @user.zip %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @user.admin %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404133158) do
+ActiveRecord::Schema.define(version: 20160411220153) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -20,11 +20,23 @@ ActiveRecord::Schema.define(version: 20160404133158) do
     t.datetime "updated_at"
   end
 
+  create_table "photos", force: true do |t|
+    t.string   "link"
+    t.boolean  "default"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "photos", ["product_id"], name: "index_photos_on_product_id", using: :btree
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.decimal  "price",       precision: 10, scale: 0
     t.integer  "quantity"
+    t.string   "description"
     t.integer  "category_id"
+    t.string   "photo_link"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,13 +47,13 @@ ActiveRecord::Schema.define(version: 20160404133158) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "password"
+    t.string   "password_digest"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
     t.string   "state"
-    t.integer  "zip"
-    t.boolean  "admin",      default: false, null: false
+    t.string   "zip"
+    t.boolean  "admin",           default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
